@@ -5,42 +5,34 @@ function stringLength (stringText, maxLength) {
   }
 
   return false;
-};
+}
 
-let stringText = 'проверяемая строка';
-let maxLength = "10";
-
-const finalConclusion = stringLength(stringText, maxLength)
+const finalConclusion = stringLength('проверяемая строка', '20');
 console.log(finalConclusion);
 
 // Функция Палиндром
 function palindromeString (wordPhrase) {
-  if (wordPhrase.toUpperCase().replaceAll(' ','') == WORD_PHRASE_REVERRS.toUpperCase().replaceAll(' ','')) {
+  const WORD_PHRASE_REVERRS = wordPhrase.split('').reverse().join('');
+  if (wordPhrase.toUpperCase().replaceAll(' ','') === WORD_PHRASE_REVERRS.toUpperCase().replaceAll(' ','')) {
     return true;
   }
 
   return false;
-};
+}
 
-let wordPhrase = 'Лёша на полке клопа нашёл';
-const WORD_PHRASE_REVERRS = wordPhrase.split("").reverse().join("");
-
-const lineTotal = palindromeString(wordPhrase);
+const lineTotal = palindromeString('Лёша на полке клопа нашёл');
 console.log(lineTotal);
 
 //Извлечение цифры из строки
-function digitExtraction (DIGIT_STRING, BLANK_LINE) {
+function digitExtraction (digitString, BLANK_LINE) {
+  const DIGIT_STRING = digitString.replaceAll(' ','');
   for (let i = 0; i <= digitString.length; i++) {
     if (DIGIT_STRING[i] >= 0 && DIGIT_STRING[i] <= 9) {
-      BLANK_LINE += DIGIT_STRING[i]
+      BLANK_LINE += DIGIT_STRING[i];
     }
   }
-  return BLANK_LINE
+  return BLANK_LINE;
 }
 
-const BLANK_LINE = '';
-let digitString = '1.5';
-const DIGIT_STRING = digitString.replaceAll(' ','')
-
-const lineTotal1 = digitExtraction(DIGIT_STRING, BLANK_LINE);
+const lineTotal1 = digitExtraction('asbnjncfslk 00007', '');
 console.log(parseInt(lineTotal1));

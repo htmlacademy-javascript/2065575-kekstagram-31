@@ -72,37 +72,98 @@ function generateLikes() {
 
 const MYLIKES = generateLikes();
 
-//Генерация id
-function generateId() {
-  const newId = [];
-  for (let i = 1; i <= 25; i++) {
-    newId.push(i);
+//Генерация avatar
+function generateAvatar() {
+  const newAatar = [];
+  for (let i = 1; i <= 6; i++) {
+    newAatar.push(i);
   }
-  return newId;
+  return newAatar;
 }
 
-const NEWID = generateId();
+const NEWAVATAR = generateAvatar();
 
+//Генерация Комментариев
+function generateComments() {
+  const newComments = [];
+  for (let i = 1; i <= 30; i++) {
+    newComments.push(i);
+  }
+  return newComments;
+}
+
+const NEWCOMMENTS = generateComments();
+
+//Генерация чисел
 const SIMILAR_WIZARD_COUNT = 25;
 
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
+function getRandomInteger (min, max) {
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
+
   return Math.floor(result);
-};
+}
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
+//Генерация разных чисел
+function createRandomIdFromRangeGenerator (min, max) {
+  const previousValues = [];
+
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+}
+
+const generatePhoto = createRandomIdFromRangeGenerator(1, 25);
+
+//функцию-генератор для получения уникальных идентификаторов
+function createIdGenerator () {
+  let lastGeneratedId = 0;
+
+  return function () {
+    lastGeneratedId += 1;
+    return lastGeneratedId;
+  };
+}
+
+const generateId = createIdGenerator();
+
+//Генерация списока комментариев
+const commentListGeneration = function () {
+  const comments = [];
+  for (let i = 1; i <= getRandomArrayElement(NEWCOMMENTS); i++) {
+    const id = i;
+    const avatar = 'img/avatar-' + getRandomArrayElement(NEWAVATAR) + '.svg';
+    const name = getRandomArrayElement(NAMES);
+    const message = getRandomArrayElement(MESSAGE);
+    comments.push({
+      id,
+      avatar,
+      message,
+      name
+    });
+  }
+  return comments;
+};
+
+//Объект
 const createWizard = () => ({
-  id: getRandomArrayElement(NEWID),
-  url: 'photos/' + getRandomArrayElement(NEWID) + '.jpg',
+  id: generateId(),
+  url: 'photos/' + generatePhoto() + '.jpg',
   description: getRandomArrayElement(DESCIPTION),
   likes: getRandomArrayElement(MYLIKES),
-  comments: getRandomArrayElement(MESSAGE),
-  name: getRandomArrayElement(NAMES),
+  comments: commentListGeneration(),
 });
 
 const similarWizards = Array.from({length: SIMILAR_WIZARD_COUNT}, createWizard);
-
 console.log(similarWizards);

@@ -60,40 +60,6 @@ const DESCIPTION = [
   'Природа вдохновляет на великие мысли.',
   'Счастье - это просто находиться здесь и сейчас.'
 ];
-
-//Генерация лайков
-function generateLikes() {
-  const newLikes = [];
-  for (let i = 15; i <= 200; i++) {
-    newLikes.push(i);
-  }
-  return newLikes;
-}
-
-const MYLIKES = generateLikes();
-
-//Генерация avatar
-function generateAvatar() {
-  const newAatar = [];
-  for (let i = 1; i <= 6; i++) {
-    newAatar.push(i);
-  }
-  return newAatar;
-}
-
-const NEWAVATAR = generateAvatar();
-
-//Генерация Комментариев
-function generateComments() {
-  const newComments = [];
-  for (let i = 1; i <= 30; i++) {
-    newComments.push(i);
-  }
-  return newComments;
-}
-
-const NEWCOMMENTS = generateComments();
-
 //Генерация чисел
 const SIMILAR_WIZARD_COUNT = 25;
 
@@ -138,31 +104,40 @@ function createIdGenerator () {
 
 const generateId = createIdGenerator();
 
-//Генерация списока комментариев
-const commentListGeneration = function () {
-  const comments = [];
-  for (let i = 1; i <= getRandomArrayElement(NEWCOMMENTS); i++) {
-    const id = i;
-    const avatar = 'img/avatar-' + getRandomArrayElement(NEWAVATAR) + '.svg';
-    const name = getRandomArrayElement(NAMES);
-    const message = getRandomArrayElement(MESSAGE);
-    comments.push({
-      id,
-      avatar,
-      message,
-      name
-    });
-  }
-  return comments;
-};
+////Генерация списока комментариев
+//const commentListGeneration = function () {
+//  const comments = [];
+//  for (let i = 1; i <= getRandomInteger(1, 30); i++) {
+//    const id = i;
+//    const avatar = `img/avatar-${getRandomInteger(1, 6)}.svg`;
+//    const name = getRandomArrayElement(NAMES);
+//    const message = getRandomArrayElement(MESSAGE);
+//    comments.push({
+//      id,
+//      avatar,
+//      message,
+//      name
+//    });
+//  }
+//  return comments;
+//};
+
+const createCommentObj = () => ({
+  id: generateId(),
+  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  message: getRandomArrayElement(MESSAGE),
+  name: getRandomArrayElement(NAMES),
+});
+
+const commentsArray = Array.from({ length: getRandomInteger(1, 30) }, createCommentObj);
 
 //Объект
 const createWizard = () => ({
   id: generateId(),
-  url: 'photos/' + generatePhoto() + '.jpg',
+  url: `photos/${generatePhoto()}.jpg`,
   description: getRandomArrayElement(DESCIPTION),
-  likes: getRandomArrayElement(MYLIKES),
-  comments: commentListGeneration(),
+  likes: getRandomInteger(15, 200),
+  comments: createCommentObj(),
 });
 
 const similarWizards = Array.from({length: SIMILAR_WIZARD_COUNT}, createWizard);

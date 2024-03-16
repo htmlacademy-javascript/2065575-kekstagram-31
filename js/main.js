@@ -1,6 +1,3 @@
 import './util.js';
-import {createWizards} from './data.js';
-
-console.log(
-  createWizards,
-);
+import './data.js';
+import './thumbnail.js';

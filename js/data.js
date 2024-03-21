@@ -18,7 +18,7 @@ const createCommentObj = function () {
     avatar: `img/avatar-${getRandomInteger(AVATR_MIN, AVATR_MAX)}.svg`,
     name: getRandomArrayElement(NAMES),
     message: getRandomArrayElement(MESSAGE),
-  }
+  };
   return comments;
 };
 

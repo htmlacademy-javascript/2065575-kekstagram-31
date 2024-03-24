@@ -38,4 +38,9 @@ const generateId = createIdGenerator();
 const generatePhoto = createRandomIdFromRangeGenerator(1, 25);
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {getRandomArrayElement, generatePhoto, generateId, getRandomInteger};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+export {getRandomArrayElement, generatePhoto, generateId, getRandomInteger, isEscapeKey, isEnterKey};
+

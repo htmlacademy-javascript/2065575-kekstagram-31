@@ -12,7 +12,7 @@ const LIKES_MAX = 200;
 const COMMENTS_MIN = 1;
 const COMMENTS_MAX = 30;
 
-const createCommentObj = function () {
+export const createCommentObj = function () {
   const comments = {
     id: generateId(),
     avatar: `img/avatar-${getRandomInteger(AVATR_MIN, AVATR_MAX)}.svg`,

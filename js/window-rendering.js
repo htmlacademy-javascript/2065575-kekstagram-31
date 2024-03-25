@@ -1,11 +1,12 @@
 import {isEscapeKey, isEnterKey} from './util.js';
-import {commentLoading, commentList} from './comment-loading.js';
+import {commentLoading} from './comment-loading.js';
 
 //const picture = document.querySelectorAll('.picture');
 const pictures = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 const buttonImages = document.querySelector('#picture-cancel');
-const nowComment = document.querySelector('.comments-loader');
+export const commentList = document.querySelector('.social__comments');
+commentList.innerHTML = "";
 
 //const comments = pictures.querySelector('.social__comments');
 //
@@ -40,8 +41,8 @@ export const renderBigImage = (item) => {
 
   picturesImages.src = item.url;
   photoTitle.textContent = item.description;
-  commentsNumberMax.textContent = item.comments.length
   commentsNumberMin.textContent = item.comments.length
+  commentsNumberMax.textContent = item.comments.length
   likesImages.textContent = item.likes
 
   commentLoading(item);
@@ -50,7 +51,6 @@ export const renderBigImage = (item) => {
 export const openBigImage = () => {
   pictures.classList.toggle('hidden');
   //socialComment.classList.add('hidden');
-  nowComment.classList.add('hidden');
   body.classList.add('modal-open');
 }
 
@@ -61,9 +61,10 @@ const onDocumentKeydown = (evt) => {
 };
 
 buttonImages.addEventListener('click', () => {
-  pictures.classList.toggle('hidden');
+  pictures.classList.add('hidden');
   body.classList.remove('modal-open');
   commentList.innerHTML = "";
+
   document.removeEventListener('keydown', onDocumentKeydown);
 });
 
@@ -73,7 +74,5 @@ document.addEventListener('keydown', (evt) => {
     pictures.classList.add('hidden');
     body.classList.remove('modal-open');
     commentList.innerHTML = "";
-
-    document.removeEventListener('keydown', onDocumentKeydown);
   };
 });

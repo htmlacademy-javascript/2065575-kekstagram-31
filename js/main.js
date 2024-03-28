@@ -1,9 +1,8 @@
 import './util.js';
 import './data.js';
 import './thumbnail.js';
-//import {openUserImages, closeUserImages} from './window-rendering.js';
+// import {creatingCommentList} from './comment-loading.js';
 
-//console.log(
-//  openUserImages (),
-//  closeUserImages (),
-//)
+// console.log(
+//   creatingCommentList()
+// )

@@ -1,6 +1,5 @@
 import {createWizards} from './data.js';
 import {renderBigImage, openBigImage} from './window-rendering.js';
-import {creatingCommentList} from './comment-loading.js';
 
 const commentList = document.querySelector('.social__comments');
 
@@ -26,7 +25,6 @@ generatedImages.forEach(({ url, description, comments, likes }) => {
     commentList.innerHTML = "";
     renderBigImage({ url, description, comments, likes});
     openBigImage();
-    creatingCommentList({ comments });
   })
   createFragment.appendChild(pictureElement);
 });
